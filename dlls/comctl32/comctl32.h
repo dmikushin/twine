@@ -231,8 +231,6 @@ BOOL WINAPI MirrorIcon(HICON *phicon1, HICON *phicon2);
 
 HRGN set_control_clipping(HDC hdc, const RECT *rect);
 
-extern void ANIMATE_Register(void);
-extern void ANIMATE_Unregister(void);
 extern void BUTTON_Register(void);
 extern void COMBO_Register(void);
 extern void COMBOEX_Register(void);

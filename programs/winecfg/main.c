@@ -129,16 +129,6 @@ doPropertySheet (HINSTANCE hInstance, HWND hOwner)
     psp[pg].lParam = 0;
     pg++;
 
-    psp[pg].dwSize = sizeof (PROPSHEETPAGEW);
-    psp[pg].dwFlags = PSP_USETITLE;
-    psp[pg].hInstance = hInstance;
-    psp[pg].pszTemplate = MAKEINTRESOURCEW (IDD_AUDIOCFG);
-    psp[pg].pszIcon = NULL;
-    psp[pg].pfnDlgProc = AudioDlgProc;
-    psp[pg].pszTitle =  load_string (IDS_TAB_AUDIO);
-    psp[pg].lParam = 0;
-    pg++;
-
     /*
      * Fill out the (General) PROPSHEETPAGE data structure 
      * for the property sheet

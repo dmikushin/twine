@@ -2641,16 +2641,6 @@ HRESULT WINAPI IUnknown_CPContainerOnChanged(IUnknown *lpUnknown, DISPID dispID)
 }
 
 /*************************************************************************
- *      @	[SHLWAPI.289]
- *
- * See PlaySoundW.
- */
-BOOL WINAPI PlaySoundWrapW(LPCWSTR pszSound, HMODULE hmod, DWORD fdwSound)
-{
-    return PlaySoundW(pszSound, hmod, fdwSound);
-}
-
-/*************************************************************************
  *      @	[SHLWAPI.294]
  *
  * Retrieve a key value from an INI file.  See GetPrivateProfileString for

@@ -69,7 +69,6 @@ static const WCHAR * const builtin_only[] =
     L"user32",
     L"vdmdbg",
     L"w32skrnl",
-    L"winmm",
     L"wintab32",
     L"wnaspi32",
     L"wow32",

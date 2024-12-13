@@ -982,6 +982,6 @@ LRESULT CALLBACK ADPCM_DriverProc(DWORD_PTR dwDevID, HDRVR hDriv, UINT wMsg,
 	return MMSYSERR_NOERROR;
 
     default:
-	return DefDriverProc(dwDevID, hDriv, wMsg, dwParam1, dwParam2);
+        return MMSYSERR_NOTSUPPORTED;
     }
 }

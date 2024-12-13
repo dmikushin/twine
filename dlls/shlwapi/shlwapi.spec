@@ -286,7 +286,6 @@
 286 varargs -noname IUnknown_CPContainerInvokeParam(ptr ptr long ptr long)
 287 stdcall -noname IUnknown_CPContainerOnChanged(ptr long)
 288 stub -noname IUnknown_CPContainerInvokeIndirect
-289 stdcall -noname PlaySoundWrapW(wstr long long)
 290 stub -noname SHMirrorIcon
 291 stdcall -noname SHMessageBoxCheckExA(ptr ptr str ptr ptr long str)
 292 stdcall -noname SHMessageBoxCheckExW(ptr ptr wstr ptr ptr long wstr)

@@ -24,7 +24,6 @@
 #include "dshow.h"
 #include "dmo.h"
 #include "dmodshow.h"
-#include "dsound.h"
 #include "mmddk.h"
 #include "vfw.h"
 #include "setupapi.h"
@@ -768,89 +767,6 @@ end:
     IParseDisplayName_Release(parser);
 }
 
-static BOOL CALLBACK test_dsound(GUID *guid, const WCHAR *desc, const WCHAR *module, void *context)
-{
-    IParseDisplayName *parser;
-    IPropertyBag *prop_bag;
-    IMoniker *mon;
-    WCHAR buffer[200];
-    WCHAR name[200];
-    VARIANT var;
-    HRESULT hr;
-
-    if (guid)
-    {
-        wcscpy(name, L"DirectSound: ");
-        wcscat(name, desc);
-    }
-    else
-    {
-        wcscpy(name, L"Default DirectSound Device");
-        guid = (GUID *)&GUID_NULL;
-    }
-
-    hr = CoCreateInstance(&CLSID_CDeviceMoniker, NULL, CLSCTX_INPROC, &IID_IParseDisplayName, (void **)&parser);
-    ok(hr == S_OK, "Got hr %#lx.\n", hr);
-
-    wcscpy(buffer, L"@device:cm:");
-    StringFromGUID2(&CLSID_AudioRendererCategory, buffer + wcslen(buffer), CHARS_IN_GUID);
-    wcscat(buffer, L"\\");
-    wcscat(buffer, name);
-
-    mon = check_display_name(parser, buffer);
-
-    hr = IMoniker_BindToStorage(mon, NULL, NULL, &IID_IPropertyBag, (void **)&prop_bag);
-    ok(hr == S_OK, "Got hr %#lx.\n", hr);
-
-    VariantInit(&var);
-    hr = IPropertyBag_Read(prop_bag, L"FriendlyName", &var, NULL);
-    if (hr == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
-    {
-        /* Win8+ uses the GUID instead of the device name */
-        IPropertyBag_Release(prop_bag);
-        IMoniker_Release(mon);
-
-        wcscpy(buffer, L"@device:cm:");
-        StringFromGUID2(&CLSID_AudioRendererCategory, buffer + wcslen(buffer), CHARS_IN_GUID);
-        wcscat(buffer, L"\\DirectSound: ");
-        StringFromGUID2(guid, buffer + wcslen(buffer) - 1, CHARS_IN_GUID);
-
-        mon = check_display_name(parser, buffer);
-
-        hr = IMoniker_BindToStorage(mon, NULL, NULL, &IID_IPropertyBag, (void **)&prop_bag);
-        ok(hr == S_OK, "Got hr %#lx.\n", hr);
-
-        VariantInit(&var);
-        hr = IPropertyBag_Read(prop_bag, L"FriendlyName", &var, NULL);
-    }
-    ok(hr == S_OK, "Got hr %#lx.\n", hr);
-
-    ok(!wcscmp(name, V_BSTR(&var)), "expected %s, got %s\n",
-        wine_dbgstr_w(name), wine_dbgstr_w(V_BSTR(&var)));
-
-    VariantClear(&var);
-    hr = IPropertyBag_Read(prop_bag, L"CLSID", &var, NULL);
-    ok(hr == S_OK, "Got hr %#lx.\n", hr);
-
-    StringFromGUID2(&CLSID_DSoundRender, buffer, CHARS_IN_GUID);
-    ok(!wcscmp(buffer, V_BSTR(&var)), "expected %s, got %s\n",
-        wine_dbgstr_w(buffer), wine_dbgstr_w(V_BSTR(&var)));
-
-    VariantClear(&var);
-    hr = IPropertyBag_Read(prop_bag, L"DSGuid", &var, NULL);
-    ok(hr == S_OK, "Got hr %#lx.\n", hr);
-
-    StringFromGUID2(guid, buffer, CHARS_IN_GUID);
-    ok(!wcscmp(buffer, V_BSTR(&var)), "expected %s, got %s\n",
-        wine_dbgstr_w(buffer), wine_dbgstr_w(V_BSTR(&var)));
-
-    VariantClear(&var);
-    IPropertyBag_Release(prop_bag);
-    IMoniker_Release(mon);
-    IParseDisplayName_Release(parser);
-    return TRUE;
-}
-
 static void test_waveout(void)
 {
     IParseDisplayName *parser;
@@ -1170,8 +1086,6 @@ START_TEST(devenum)
     test_dmo(&DMOCATEGORY_VIDEO_DECODER, &DMOCATEGORY_VIDEO_DECODER);
 
     test_legacy_filter();
-    hr = DirectSoundEnumerateW(test_dsound, NULL);
-    ok(hr == S_OK, "Got hr %#lx.\n", hr);
     test_waveout();
     test_wavein();
     test_midiout();

@@ -35,7 +35,6 @@
  *   -- FIXMEs + BUGS (search for them)
  *
  * Control Classes
- *   -- ICC_ANIMATE_CLASS
  *   -- ICC_BAR_CLASSES
  *   -- ICC_COOL_CLASSES
  *   -- ICC_DATE_CLASSES
@@ -185,7 +184,6 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 	    COMCTL32_RefreshSysColors();
 
             /* like comctl32 5.82+ register all the common control classes */
-            ANIMATE_Register ();
             COMBOEX_Register ();
             DATETIME_Register ();
             FLATSB_Register ();
@@ -212,7 +210,6 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
             if (lpvReserved) break;
 
             /* unregister all common control classes */
-            ANIMATE_Unregister ();
             COMBOEX_Unregister ();
             DATETIME_Unregister ();
             FLATSB_Unregister ();
