@@ -1,5 +1,0 @@
-TESTDLL   = devenum.dll
-IMPORTS   = advapi32 msdmo oleaut32 ole32
-
-SOURCES = \
-	devenum.c
