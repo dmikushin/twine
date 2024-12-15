@@ -1,0 +1,21 @@
+add_wine_dll(NAME netapi32
+    UNIXLIB
+        netapi32.so
+    IMPORTLIB
+        netapi32
+    IMPORTS
+        rpcrt4
+        iphlpapi
+        ws2_32
+        advapi32
+        dnsapi
+        netutils
+    SOURCES
+        atsvc.idl
+        nbcmdqueue.c
+        nbnamecache.c
+        nbt.c
+        netapi32.c
+        netbios.c
+        unixlib.c
+)

@@ -1,0 +1,24 @@
+add_wine_dll(NAME actxprxy
+    IMPORTS
+        uuid
+        oleaut32
+        ole32
+        rpcrt4
+    SOURCES
+        actxprxy_activscp.idl
+        actxprxy_comcat.idl
+        actxprxy_docobj.idl
+        actxprxy_hlink.idl
+        actxprxy_htiface.idl
+        actxprxy_htiframe.idl
+        actxprxy_objsafe.idl
+        actxprxy_ocmm.idl
+        actxprxy_servprov.idl
+        actxprxy_shldisp.idl
+        actxprxy_shobjidl.idl
+        actxprxy_urlhist.idl
+        usrmarshal.c
+    DLLDATA_EXTRADEFS
+        WINE_REGISTER_DLL
+        PROXY_DELEGATION
+)

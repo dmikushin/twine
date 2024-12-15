@@ -1,0 +1,21 @@
+add_wine_dll(NAME oleacc
+    IMPORTLIB
+        oleacc
+    IMPORTS
+        uuid
+        oleaut32
+        ole32
+        user32
+        rpcrt4
+    SOURCES
+        client.c
+        main.c
+        oleacc.rc
+        oleacc_classes.idl
+        propservice.c
+        window.c
+    DLLDATA_EXTRADEFS
+        ENTRY_PREFIX=OLEACC_
+        PROXY_DELEGATION
+        WINE_REGISTER_DLL
+)

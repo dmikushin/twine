@@ -1,0 +1,17 @@
+add_wine_dll(NAME bcrypt
+    IMPORTS
+        advapi32
+    IMPORTLIB
+        bcrypt
+    UNIXLIB
+        bcrypt.so
+    UNIX_CFLAGS
+        ${GNUTLS_CFLAGS}
+    SOURCES
+        bcrypt_main.c
+        gnutls.c
+        md2.c
+        sha256.c
+        sha512.c
+        version.rc
+)

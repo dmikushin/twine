@@ -1,0 +1,26 @@
+add_wine_dll(NAME uxtheme
+    EXTRADEFS
+        _UXTHEME_
+    IMPORTLIB
+        uxtheme
+    IMPORTS
+        user32
+        gdi32
+        advapi32
+    DELAYIMPORTS
+        msimg32
+    SOURCES
+        buffer.c
+        dialog.c
+        draw.c
+        main.c
+        metric.c
+        msstyles.c
+        property.c
+        scrollbar.c
+        stylemap.c
+        system.c
+        uxini.c
+        version.rc
+        window.c
+)
