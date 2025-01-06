@@ -166,7 +166,7 @@ struct tagVARIANT {
       WORD wReserved2;
       WORD wReserved3;
       union {
-        signed char cVal;
+        char cVal;
         USHORT uiVal;
         ULONG ulVal;
         INT intVal;
@@ -189,7 +189,7 @@ struct tagVARIANT {
         SAFEARRAY *parray;
         LONGLONG llVal;
         ULONGLONG ullVal;
-        signed char *pcVal;
+        char *pcVal;
         USHORT *puiVal;
         ULONG *pulVal;
         INT *pintVal;
