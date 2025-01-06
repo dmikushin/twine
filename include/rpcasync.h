@@ -136,7 +136,7 @@ typedef union _RPC_ASYNC_NOTIFICATION_INFO
     {
         HWND hWnd;
         UINT Msg;
-    } HWND;
+    } HWND_;
     HANDLE hEvent;
     PFN_RPCNOTIFICATION_ROUTINE NotificationRoutine;
 } RPC_ASYNC_NOTIFICATION_INFO, *PRPC_ASYNC_NOTIFICATION_INFO;
